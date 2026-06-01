@@ -11,5 +11,9 @@
     "react-router-dom": "^7.16.0",
     "typescript": "latest",
     "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.16",
+    "@types/react-dom": "^19.2.3"
   }
 }

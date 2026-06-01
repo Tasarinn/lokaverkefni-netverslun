@@ -4,3 +4,19 @@ body {
   background-color: #111;
   color: white;
 }
+
+nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #1c1c1c;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+}
