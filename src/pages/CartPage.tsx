@@ -6,7 +6,9 @@ export function CartPage() {
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
-  const totalPrice = useCartStore((state) => state.totalPrice);
+  const totalPrice = useCartStore((state) =>
+  state.getTotalPrice(),
+);
 
   if (items.length === 0) {
     return (

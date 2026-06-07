@@ -4,7 +4,8 @@ import { useCartStore } from '../features/cart/cartStore';
 export function CheckoutPage() {
   const navigate = useNavigate();
   const items = useCartStore((state) => state.items);
-  const totalPrice = useCartStore((state) => state.totalPrice);
+  const totalPrice = useCartStore((state) =>
+  state.getTotalPrice(),);
   const clearCart = useCartStore((state) => state.clearCart);
 
   function handleFakePayment() {
