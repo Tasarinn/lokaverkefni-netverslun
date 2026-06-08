@@ -1,6 +1,6 @@
-import { describe, expect, it, beforeEach } from 'vitest';
-import { useCartStore } from './cartStore';
+import { beforeEach, describe, expect, it } from 'vitest';
 import type { Product } from '../../types/product';
+import { useCartStore } from './cartStore';
 
 const product: Product = {
   id: 1,
