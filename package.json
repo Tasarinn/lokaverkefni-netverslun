@@ -1,6 +1,8 @@
 {
   "scripts": {
     "dev": "vite",
+    "test": "vitest",
+    "test:run": "vitest run",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
@@ -16,7 +18,11 @@
     "zustand": "latest"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "jsdom": "^29.1.1",
+    "vitest": "^4.1.8"
   }
 }
