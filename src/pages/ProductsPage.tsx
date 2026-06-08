@@ -1,12 +1,38 @@
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { ProductCard } from '../components/ui/ProductCard';
-import { products } from '../lib/products';
+import { getProducts } from '../lib/products';
 
 export function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', ...new Set(products.map((product) => product.category))];
+  const {
+    data: products = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['products'],
+    queryFn: getProducts,
+  });
+
+  if (isLoading) {
+    return <h1>Loading products...</h1>;
+  }
+
+  if (error instanceof Error) {
+    return (
+      <>
+        <h1>Could not load products</h1>
+        <pre>{error.message}</pre>
+      </>
+    );
+  }
+
+  const categories = [
+    'All',
+    ...Array.from(new Set(products.map((product) => product.category))),
+  ];
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name
@@ -32,10 +58,7 @@ export function ProductsPage() {
 
       <div>
         {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-          >
+          <button key={category} onClick={() => setSelectedCategory(category)}>
             {category}
           </button>
         ))}

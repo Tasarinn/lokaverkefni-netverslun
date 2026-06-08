@@ -1,28 +1,33 @@
 import type { Product } from '../types/product';
+import { supabase } from './supabase';
 
-export const products: Product[] = [
-  {
-    id: 1,
-    name: 'Whey Protein',
-    price: 4990,
-    image: 'https://placehold.co/300x300',
-    category: 'Protein',
-    description: 'High quality whey protein.',
-  },
-  {
-    id: 2,
-    name: 'Creatine',
-    price: 2990,
-    image: 'https://placehold.co/300x300',
-    category: 'Supplements',
-    description: 'Pure creatine monohydrate.',
-  },
-  {
-    id: 3,
-    name: 'Pre Workout',
-    price: 3990,
-    image: 'https://placehold.co/300x300',
-    category: 'Energy',
-    description: 'Boost your workouts.',
-  },
-];
+export async function getProducts(): Promise<Product[]> {
+  console.log('ENV URL:', import.meta.env.VITE_SUPABASE_URL);
+
+  const response = await supabase
+    .from('products')
+    .select('*')
+    .order('id');
+
+  console.log('FULL SUPABASE RESPONSE:', response);
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+
+  return response.data ?? [];
+}
+
+export async function getProductById(id: number): Promise<Product | null> {
+  const response = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+
+  return response.data;
+}

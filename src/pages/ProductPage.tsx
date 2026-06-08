@@ -1,13 +1,29 @@
+import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
-import { products } from '../lib/products';
 import { useCartStore } from '../features/cart/cartStore';
+import { getProductById } from '../lib/products';
 
 export function ProductPage() {
   const { id } = useParams();
 
-  const product = products.find((item) => item.id === Number(id));
   const addToCart = useCartStore((state) => state.addToCart);
-  if (!product) {
+
+  const productId = Number(id);
+
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['product', productId],
+    queryFn: () => getProductById(productId),
+  });
+
+  if (isLoading) {
+    return <p>Loading product...</p>;
+  }
+
+  if (error || !product) {
     return (
       <>
         <h1>Product not found</h1>
