@@ -25,7 +25,7 @@ export function CartPage() {
       <h1>Cart</h1>
 
       {items.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} className="cart-item">
           <h3>{item.name}</h3>
           <p>{item.price} ISK</p>
           <p>Quantity: {item.quantity}</p>

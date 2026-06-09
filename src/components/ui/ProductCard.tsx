@@ -7,12 +7,11 @@ type ProductCardProps = {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link to={`/products/${product.id}`}>
-      <div>
-        <img src={product.image} alt={product.name} />
-        <h3>{product.name}</h3>
-        <p>{product.price} ISK</p>
-      </div>
+    <Link to={`/products/${product.id}`} className="product-card">
+      <img src={product.image} alt={product.name} />
+      <h3>{product.name}</h3>
+      <p>{product.category}</p>
+      <strong>{product.price} ISK</strong>
     </Link>
   );
 }

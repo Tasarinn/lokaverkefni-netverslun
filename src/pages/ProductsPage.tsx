@@ -65,12 +65,14 @@ export function ProductsPage() {
       </div>
 
       {filteredProducts.length === 0 ? (
-        <p>No products found.</p>
-      ) : (
-        filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))
-      )}
+  <p>No products found.</p>
+) : (
+  <div className="products-grid">
+    {filteredProducts.map((product) => (
+      <ProductCard key={product.id} product={product} />
+    ))}
+  </div>
+)}
     </>
   );
 }
